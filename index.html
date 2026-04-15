@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PULSEPRINT Engineering Console</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "inverse-surface": "#e5e2e1",
+                        "on-error-container": "#ffdad6",
+                        "on-background": "#e5e2e1",
+                        "inverse-primary": "#5d5f5f",
+                        "surface-container-lowest": "#0e0e0e",
+                        "outline": "#919191",
+                        "on-tertiary": "#410000",
+                        "on-secondary-container": "#6bfe9c",
+                        "on-primary-fixed": "#ffffff",
+                        "on-primary-fixed-variant": "#e2e2e2",
+                        "on-primary": "#1a1c1c",
+                        "outline-variant": "#474747",
+                        "on-secondary": "#00210c",
+                        "on-tertiary-container": "#000000",
+                        "secondary-fixed-dim": "#1fc46a",
+                        "secondary": "#4ae183",
+                        "on-error": "#690005",
+                        "background": "#131313",
+                        "surface-container-high": "#2a2a2a",
+                        "surface": "#131313",
+                        "primary-fixed": "#5d5f5f",
+                        "tertiary": "#ffdad5",
+                        "on-tertiary-fixed-variant": "#ffdad5",
+                        "tertiary-fixed-dim": "#910807",
+                        "on-secondary-fixed-variant": "#004520",
+                        "tertiary-container": "#fa5a48",
+                        "surface-tint": "#c6c6c6",
+                        "surface-bright": "#3a3939",
+                        "error": "#ffb4ab",
+                        "on-secondary-fixed": "#00210c",
+                        "secondary-container": "#005228",
+                        "surface-variant": "#353534",
+                        "surface-dim": "#131313",
+                        "on-surface": "#e5e2e1",
+                        "on-surface-variant": "#c6c6c6",
+                        "surface-container-low": "#1c1b1b",
+                        "primary": "#ffffff",
+                        "primary-fixed-dim": "#454747",
+                        "primary-container": "#d4d4d4",
+                        "error-container": "#93000a",
+                        "on-primary-container": "#000000",
+                        "surface-container-highest": "#353534",
+                        "secondary-fixed": "#4ae183",
+                        "on-tertiary-fixed": "#ffffff",
+                        "surface-container": "#201f1f",
+                        "tertiary-fixed": "#b4271d",
+                        "inverse-on-surface": "#313030"
+                    },
+                    fontFamily: {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Space Grotesk"]
+                    },
+                    borderRadius: {"DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .scan-line {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #ffffff, transparent);
+            width: 100%;
+            position: absolute;
+            top: 0;
+            opacity: 0.1;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-secondary selection:text-on-secondary overflow-hidden h-screen flex">
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col h-full border-r border-[#474747]/15 bg-[#1c1b1b] w-64 shrink-0">
+<div class="p-6">
+<div class="text-lg font-black text-[#ffffff] font-headline tracking-widest">PULSEPRINT</div>
+<div class="font-['Space_Grotesk'] text-[0.6875rem] tracking-widest uppercase text-on-surface-variant mt-1">ENGINEERING_CONSOLE_V1</div>
+</div>
+<nav class="flex-1 px-3 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 bg-[#353534] text-[#4ae183] border-r-2 border-[#4ae183] transition-all duration-150 ease-in-out font-label text-[0.6875rem] tracking-widest uppercase" href="index.html">
+<span class="material-symbols-outlined text-lg">developer_board</span>
+<span>DEVICES</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-[#c6c6c6] hover:bg-[#201f1f] hover:text-[#ffffff] transition-all duration-150 ease-in-out font-label text-[0.6875rem] tracking-widest uppercase" href="dashboard.html">
+<span class="material-symbols-outlined text-lg">dashboard</span>
+<span>DASHBOARD</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-[#c6c6c6] hover:bg-[#201f1f] hover:text-[#ffffff] transition-all duration-150 ease-in-out font-label text-[0.6875rem] tracking-widest uppercase" href="logs.html">
+<span class="material-symbols-outlined text-lg">terminal</span>
+<span>LOGS</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-[#c6c6c6] hover:bg-[#201f1f] hover:text-[#ffffff] transition-all duration-150 ease-in-out font-label text-[0.6875rem] tracking-widest uppercase" href="diagnostics.html">
+<span class="material-symbols-outlined text-lg">analytics</span>
+<span>DIAGNOSTICS</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-[#474747]/15 p-3 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-[#c6c6c6] hover:bg-[#201f1f] hover:text-[#ffffff] font-label text-[0.6875rem] tracking-widest uppercase" href="settings.html">
+<span class="material-symbols-outlined text-lg">settings</span>
+<span>SETTINGS</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-[#c6c6c6] hover:bg-[#201f1f] hover:text-[#ffffff] font-label text-[0.6875rem] tracking-widest uppercase" href="index.html">
+<span class="material-symbols-outlined text-lg">logout</span>
+<span>LOGOUT</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col h-full overflow-hidden bg-background">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-6 h-14 bg-[#131313] shrink-0 z-50">
+<div class="flex items-center gap-4">
+<span class="font-['Space_Grotesk'] uppercase tracking-tighter text-sm font-bold text-[#ffffff]">SYSTEM STATUS:</span>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-['Space_Grotesk'] uppercase tracking-tighter text-sm text-[#4ae183] font-bold">MONITORING</span>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden sm:flex items-center gap-4 text-on-surface-variant font-label text-[0.6875rem] tracking-widest">
+<span>UTC: 14:32:09</span>
+<span>SESSION_ID: PP_0492_X</span>
+</div>
+<div class="flex items-center gap-3">
+<button class="material-symbols-outlined text-[#c6c6c6] hover:bg-[#353534] p-1.5 transition-colors">bluetooth</button>
+<button class="material-symbols-outlined text-[#c6c6c6] hover:bg-[#353534] p-1.5 transition-colors">schedule</button>
+<div class="w-[1px] h-6 bg-outline-variant/30 mx-2"></div>
+<div class="w-8 h-8 bg-surface-container-highest flex items-center justify-center font-bold text-xs">A1</div>
+</div>
+</div>
+</header>
+<!-- Connection Screen Content (From SCREEN_26) -->
+<div class="flex-1 flex items-center justify-center p-6 overflow-y-auto">
+<section class="w-full max-w-lg bg-surface-container-low flex flex-col items-center p-12 relative overflow-hidden">
+<div class="scan-line"></div>
+<!-- Connection Identity -->
+<div class="mb-12 text-center w-full">
+<div class="font-label text-[10px] tracking-[0.3em] uppercase text-on-surface-variant mb-4">SYSTEM_STATUS_AWAITING</div>
+<h1 class="font-headline text-4xl font-extrabold uppercase tracking-tighter text-primary mb-2">PULSEPRINT SYSTEM</h1>
+<p class="font-body text-on-surface-variant opacity-60 text-sm tracking-wide uppercase" id="statusText">NO DEVICE CONNECTED</p>
+</div>
+<!-- Central Graphic Element -->
+<div class="w-32 h-32 bg-surface-container-lowest flex items-center justify-center mb-12 relative">
+<div class="absolute inset-0 border border-outline-variant opacity-20"></div>
+<span class="material-symbols-outlined text-5xl text-on-surface-variant opacity-20">bluetooth</span>
+<!-- Pulse Indicator -->
+<div class="absolute -bottom-1 -right-1 w-3 h-3 bg-tertiary-container animate-pulse"></div>
+</div>
+<!-- Primary Action -->
+<button class="w-full bg-primary text-on-primary py-4 font-headline font-bold uppercase tracking-widest hover:bg-inverse-surface transition-colors active:scale-[0.98] duration-100 flex items-center justify-center gap-3 mb-10" id="connectBtn">
+<span class="material-symbols-outlined text-xl">bluetooth</span>
+                    CONNECT DEVICE
+                </button>
+<!-- Status Indicators Grid -->
+<div class="w-full grid grid-cols-2 gap-px bg-outline-variant/10">
+<div class="bg-surface-container p-4 flex items-center justify-between border-l-2 border-secondary state-item active" id="idle">
+<span class="font-label text-[9px] text-secondary tracking-widest">IDLE</span>
+<span class="w-1.5 h-1.5 bg-secondary"></span>
+</div>
+<div class="bg-surface-container p-4 flex items-center justify-between opacity-40 state-item" id="scanning">
+<span class="font-label text-[9px] text-on-surface-variant tracking-widest">SCANNING...</span>
+<span class="material-symbols-outlined text-[14px]">search</span>
+</div>
+<div class="bg-surface-container p-4 flex items-center justify-between opacity-40 state-item" id="connecting">
+<span class="font-label text-[9px] text-on-surface-variant tracking-widest">CONNECTING...</span>
+<span class="material-symbols-outlined text-[14px]">sync</span>
+</div>
+<div class="bg-surface-container p-4 flex items-center justify-between opacity-40 state-item" id="connected">
+<span class="font-label text-[9px] text-on-surface-variant tracking-widest">CONNECTED</span>
+<span class="material-symbols-outlined text-[14px]">bluetooth_connected</span>
+</div>
+</div>
+<!-- Bottom Metadata -->
+<div class="mt-8 flex items-center justify-between w-full font-label text-[9px] text-on-surface-variant opacity-40 uppercase tracking-tighter">
+<div>ADDR: 0xFD33_B8</div>
+<div class="flex items-center gap-2">
+                        SIGNAL: --dBm
+                        <span class="material-symbols-outlined text-[12px]">signal_cellular_0_bar</span>
+</div>
+</div>
+</section>
+</div>
+<!-- Technical Background Detail (Right Edge) -->
+<div class="fixed bottom-12 right-12 font-label text-[10px] text-on-surface-variant/20 uppercase tracking-[0.5em] pointer-events-none hidden lg:block" style="writing-mode: vertical-rl;">
+            KINETIC_MONOLITH_v1.0.42_CORE
+        </div>
+<!-- Footer -->
+<footer class="bg-[#131313] text-on-surface-variant/60 font-label text-[9px] tracking-widest uppercase px-6 py-2 flex justify-between shrink-0 border-t border-outline-variant/10">
+<div>© 2024 KINETIC_MONOLITH_SYSTEMS</div>
+<div class="flex gap-4">
+<a class="hover:text-primary transition-colors" href="#">SYS_STATUS</a>
+<a class="hover:text-primary transition-colors" href="#">ENCRYPTION_v3</a>
+</div>
+</footer>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-[#1c1b1b] flex justify-around items-center z-50 border-t border-outline-variant/10">
+<a class="flex flex-col items-center gap-1 text-[#4ae183]" href="#">
+<span class="material-symbols-outlined">developer_board</span>
+<span class="text-[10px] font-label uppercase">DEV</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-[#c6c6c6]" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px] font-label uppercase">DASH</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-[#c6c6c6]" href="#">
+<span class="material-symbols-outlined">terminal</span>
+<span class="text-[10px] font-label uppercase">LOGS</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-[#c6c6c6]" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[10px] font-label uppercase">SET</span>
+</a>
+</nav>
+<script>
+  (function () {
+    const API = "http://localhost:5050";
+    const connectBtn = document.getElementById("connectBtn");
+    const statusText = document.getElementById("statusText");
+    const states = ["idle", "scanning", "connecting", "connected"];
+
+    function setState(state) {
+      states.forEach((id) => {
+        const node = document.getElementById(id);
+        if (!node) return;
+        node.classList.toggle("active", id === state);
+        node.style.opacity = id === state ? "1" : "0.4";
+      });
+    }
+
+    async function connectDevice() {
+      if (!connectBtn) return;
+      setState("scanning");
+      statusText.textContent = "Scanning...";
+      try {
+        setTimeout(() => {
+          setState("connecting");
+          statusText.textContent = "Connecting...";
+        }, 700);
+
+        const res = await fetch(`${API}/api/devices/connect`, { method: "POST" });
+        const payload = await res.json();
+        setState("connected");
+        statusText.textContent = `Connected to ${payload.device.name}`;
+      } catch (error) {
+        setState("idle");
+        statusText.textContent = "Connection failed";
+        console.error(error);
+      }
+    }
+
+    connectBtn && connectBtn.addEventListener("click", connectDevice);
+  })();
+</script>
+</body></html>

@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PULSEPRINT | SYSTEM_DIAGNOSTICS_V2.0</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "error-container": "#93000a",
+                        "error": "#ffb4ab",
+                        "tertiary-fixed": "#b4271d",
+                        "outline": "#919191",
+                        "on-surface-variant": "#c6c6c6",
+                        "on-secondary-fixed": "#00210c",
+                        "surface-container-low": "#1c1b1b",
+                        "surface": "#131313",
+                        "on-secondary": "#00210c",
+                        "inverse-primary": "#5d5f5f",
+                        "secondary-container": "#005228",
+                        "surface-container-lowest": "#0e0e0e",
+                        "surface-container": "#201f1f",
+                        "on-tertiary-fixed": "#ffffff",
+                        "on-primary-fixed-variant": "#e2e2e2",
+                        "secondary": "#4ae183",
+                        "surface-bright": "#3a3939",
+                        "on-secondary-container": "#6bfe9c",
+                        "on-primary": "#1a1c1c",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary": "#410000",
+                        "surface-dim": "#131313",
+                        "inverse-surface": "#e5e2e1",
+                        "surface-variant": "#353534",
+                        "on-tertiary-fixed-variant": "#ffdad5",
+                        "inverse-on-surface": "#313030",
+                        "primary": "#ffffff",
+                        "on-error": "#690005",
+                        "on-surface": "#e5e2e1",
+                        "primary-container": "#d4d4d4",
+                        "tertiary": "#ffdad5",
+                        "surface-container-high": "#2a2a2a",
+                        "tertiary-container": "#fa5a48",
+                        "on-background": "#e5e2e1",
+                        "on-primary-fixed": "#ffffff",
+                        "surface-container-highest": "#353534",
+                        "secondary-fixed": "#4ae183",
+                        "outline-variant": "#474747",
+                        "surface-tint": "#c6c6c6",
+                        "background": "#131313",
+                        "primary-fixed": "#5d5f5f",
+                        "on-secondary-fixed-variant": "#004520",
+                        "tertiary-fixed-dim": "#910807",
+                        "primary-fixed-dim": "#454747",
+                        "on-primary-container": "#000000",
+                        "secondary-fixed-dim": "#1fc46a",
+                        "on-tertiary-container": "#000000"
+                    },
+                    fontFamily: {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Space Grotesk"]
+                    },
+                    borderRadius: {"DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        .font-mono-tech { font-family: 'Space Grotesk', monospace; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #131313; }
+        ::-webkit-scrollbar-thumb { background: #353534; }
+        .diag-spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(74, 225, 131, 0.25);
+            border-top-color: #4ae183;
+            border-radius: 9999px;
+            margin: 0 auto;
+            animation: diag-spin 0.8s linear infinite;
+        }
+        .diag-fade-in {
+            animation: diag-fade-in 300ms ease;
+        }
+        @keyframes diag-spin {
+            to { transform: rotate(360deg); }
+        }
+        @keyframes diag-fade-in {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased selection:bg-primary selection:text-on-primary">
+
+
+<!-- SIDEBAR NAV -->
+<!-- SideNavBar (UPDATED - Dashboard Style with Diagnostics Active) -->
+<!-- SideNavBar (FINAL FIXED VERSION) -->
+<aside class="fixed left-0 top-0 h-full w-64 z-40 
+              hidden md:flex flex-col 
+              border-r border-[#474747]/15 
+              bg-[#1c1b1b]">
+
+  <!-- LOGO -->
+  <div class="p-6">
+    <div class="text-lg font-black text-[#ffffff] font-headline tracking-widest">
+      PULSEPRINT
+    </div>
+    <div class="font-['Space_Grotesk'] text-[0.6875rem] tracking-widest uppercase text-on-surface-variant mt-1">
+      ENGINEERING_CONSOLE_V1
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav class="flex-1 px-3 space-y-1">
+
+    <a href="index.html"
+       class="flex items-center gap-3 px-3 py-2 text-[#c6c6c6] 
+              hover:bg-[#201f1f] hover:text-[#ffffff] 
+              transition-all duration-150 font-label text-[0.6875rem] tracking-widest uppercase">
+      <span class="material-symbols-outlined text-lg">developer_board</span>
+      <span>DEVICES</span>
+    </a>
+
+    <a href="dashboard.html"
+       class="flex items-center gap-3 px-3 py-2 text-[#c6c6c6] 
+              hover:bg-[#201f1f] hover:text-[#ffffff] 
+              transition-all duration-150 font-label text-[0.6875rem] tracking-widest uppercase">
+      <span class="material-symbols-outlined text-lg">dashboard</span>
+      <span>DASHBOARD</span>
+    </a>
+
+    <a href="logs.html"
+       class="flex items-center gap-3 px-3 py-2 text-[#c6c6c6] 
+              hover:bg-[#201f1f] hover:text-[#ffffff] 
+              transition-all duration-150 font-label text-[0.6875rem] tracking-widest uppercase">
+      <span class="material-symbols-outlined text-lg">terminal</span>
+      <span>LOGS</span>
+    </a>
+
+    <!-- ACTIVE -->
+    <a href="diagnostics.html"
+       class="flex items-center gap-3 px-3 py-2 
+              bg-[#353534] text-[#4ae183] border-r-2 border-[#4ae183]
+              transition-all duration-150 font-label text-[0.6875rem] tracking-widest uppercase">
+      <span class="material-symbols-outlined text-lg">analytics</span>
+      <span>DIAGNOSTICS</span>
+    </a>
+
+  </nav>
+
+  <!-- FOOTER -->
+  <div class="mt-auto border-t border-[#474747]/15 p-3 space-y-1">
+
+    <a href="#"
+       class="flex items-center gap-3 px-3 py-2 text-[#c6c6c6] 
+              hover:bg-[#201f1f] hover:text-[#ffffff] 
+              font-label text-[0.6875rem] tracking-widest uppercase">
+      <span class="material-symbols-outlined text-lg">settings</span>
+      <span>SETTINGS</span>
+    </a>
+
+    <a href="#"
+       class="flex items-center gap-3 px-3 py-2 text-[#c6c6c6] 
+              hover:bg-[#201f1f] hover:text-[#ffffff] 
+              font-label text-[0.6875rem] tracking-widest uppercase">
+      <span class="material-symbols-outlined text-lg">logout</span>
+      <span>LOGOUT</span>
+    </a>
+
+  </div>
+
+</aside>
+
+
+<!-- MAIN CONTENT WRAPPER -->
+<div class="pl-64 flex flex-col min-h-screen">
+<!-- TOP APP BAR -->
+<header class="flex justify-between items-center w-full px-6 h-14 bg-[#131313] shrink-0 z-50">
+<div class="flex items-center gap-4">
+<span class="font-['Space_Grotesk'] uppercase tracking-tighter text-sm font-bold text-[#ffffff]">SYSTEM STATUS:</span>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-['Space_Grotesk'] uppercase tracking-tighter text-sm text-[#4ae183] font-bold">MONITORING</span>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden sm:flex items-center gap-4 text-on-surface-variant font-label text-[0.6875rem] tracking-widest">
+<span>UTC: 14:32:09</span>
+<span>SESSION_ID: PP_0492_X</span>
+</div>
+<div class="flex items-center gap-3">
+<button class="material-symbols-outlined text-[#c6c6c6] hover:bg-[#353534] p-1.5 transition-colors">bluetooth</button>
+<button class="material-symbols-outlined text-[#c6c6c6] hover:bg-[#353534] p-1.5 transition-colors">schedule</button>
+<div class="w-[1px] h-6 bg-outline-variant/30 mx-2"></div>
+<div class="w-8 h-8 bg-surface-container-highest flex items-center justify-center font-bold text-xs">A1</div>
+</div>
+</div>
+</header>
+
+<!-- PAGE CONTENT -->
+<main class="flex-1 p-6 space-y-6 max-w-[1400px]">
+<!-- HEADER -->
+<div class="flex justify-between items-end border-b border-outline-variant/20 pb-4">
+<div>
+<h1 class="font-headline text-3xl font-black tracking-tight text-white">SYSTEM_DIAGNOSTICS_V2.0</h1>
+<p class="font-label text-xs text-on-surface-variant mt-1 tracking-widest uppercase opacity-60">Biometric Sensor Array Verification Protocol</p>
+</div>
+<div class="flex space-x-2">
+<button class="bg-primary text-on-primary px-4 py-2 text-[0.7rem] font-bold font-headline uppercase tracking-widest active:scale-95 transition-transform" id="runDiagnosticsBtn">Run All Diagnostics</button>
+</div>
+</div>
+<!-- HEALTH STATUS GRID -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- CPU -->
+<div class="bg-surface-container-low p-5 space-y-3">
+<div class="flex justify-between items-center">
+<span class="font-label text-[0.65rem] text-on-surface-variant font-bold tracking-widest uppercase">CPU_LOAD</span>
+<span class="text-secondary text-[0.6rem] font-black uppercase tracking-widest">Nominal</span>
+</div>
+<div class="font-headline text-3xl font-bold text-white leading-none" id="cpuUsage">12%</div>
+<div class="h-1 bg-surface-container-highest w-full relative">
+<div class="absolute top-0 left-0 h-full bg-secondary w-[12%]"></div>
+</div>
+</div>
+<!-- MEMORY -->
+<div class="bg-surface-container-low p-5 space-y-3">
+<div class="flex justify-between items-center">
+<span class="font-label text-[0.65rem] text-on-surface-variant font-bold tracking-widest uppercase">MEMORY</span>
+<span class="text-on-surface-variant text-[0.6rem] font-black uppercase tracking-widest">Active</span>
+</div>
+<div class="font-headline text-3xl font-bold text-white leading-none"><span id="memoryUsage">4.2</span><span class="text-sm font-medium text-on-surface-variant/60 ml-1">/ 16GB</span></div>
+<div class="h-1 bg-surface-container-highest w-full relative">
+<div class="absolute top-0 left-0 h-full bg-primary w-[26%]"></div>
+</div>
+</div>
+<!-- CORE TEMP -->
+<div class="bg-surface-container-low p-5 space-y-3">
+<div class="flex justify-between items-center">
+<span class="font-label text-[0.65rem] text-on-surface-variant font-bold tracking-widest uppercase">CORE_TEMP</span>
+<span class="text-secondary text-[0.6rem] font-black uppercase tracking-widest">Optimal</span>
+</div>
+<div class="font-headline text-3xl font-bold text-white leading-none" id="diagTemp">34°C</div>
+<div class="h-1 bg-surface-container-highest w-full relative overflow-hidden">
+<div class="absolute top-0 left-0 h-full bg-secondary w-[34%]"></div>
+</div>
+</div>
+<!-- VOLTAGE -->
+<div class="bg-surface-container-low p-5 space-y-3">
+<div class="flex justify-between items-center">
+<span class="font-label text-[0.65rem] text-on-surface-variant font-bold tracking-widest uppercase">VOLTAGE</span>
+<span class="text-secondary text-[0.6rem] font-black uppercase tracking-widest">Stable</span>
+</div>
+<div class="font-headline text-3xl font-bold text-white leading-none" id="diagVoltage">1.22V</div>
+<div class="h-1 bg-surface-container-highest w-full relative">
+<div class="absolute top-0 left-0 h-full bg-secondary w-[60%]"></div>
+</div>
+</div>
+</section>
+<!-- MIDDLE ROW -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- SENSOR CALIBRATION PANEL -->
+<div class="lg:col-span-2 bg-surface-container p-0">
+<div class="bg-surface-container-high px-5 py-3 flex justify-between items-center">
+<h2 class="font-headline text-sm font-bold tracking-widest uppercase">SENSOR CALIBRATION PANEL</h2>
+<span class="material-symbols-outlined text-sm text-on-surface-variant" data-icon="tune">tune</span>
+</div>
+<div class="p-0 overflow-x-auto">
+<table class="w-full text-left font-body text-[0.75rem]">
+<thead class="bg-surface-container-lowest/50 text-on-surface-variant/60 uppercase text-[0.6rem] font-bold tracking-widest">
+<tr>
+<th class="px-5 py-3">Sensor_ID</th>
+<th class="px-5 py-3 text-center">Status</th>
+<th class="px-5 py-3">Offset</th>
+<th class="px-5 py-3">Gain</th>
+<th class="px-5 py-3 text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<tr class="hover:bg-surface-container-highest/30 transition-colors">
+<td class="px-5 py-4 font-mono-tech font-medium text-white">ECG_LEAD_I</td>
+<td class="px-5 py-4 text-center">
+<span class="px-2 py-0.5 bg-secondary-container text-secondary text-[0.65rem] font-bold">CALIBRATED</span>
+</td>
+<td class="px-5 py-4 text-on-surface-variant">+0.002mV</td>
+<td class="px-5 py-4 text-on-surface-variant">x1.0004</td>
+<td class="px-5 py-4 text-right">
+<button class="text-white hover:text-secondary border border-outline px-3 py-1 text-[0.6rem] uppercase font-bold tracking-widest transition-colors recalibrate-btn" data-sensor="ECG_LEAD_I">Recalibrate</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-highest/30 transition-colors">
+<td class="px-5 py-4 font-mono-tech font-medium text-white">ECG_LEAD_II</td>
+<td class="px-5 py-4 text-center">
+<span class="px-2 py-0.5 bg-secondary-container text-secondary text-[0.65rem] font-bold">CALIBRATED</span>
+</td>
+<td class="px-5 py-4 text-on-surface-variant">-0.001mV</td>
+<td class="px-5 py-4 text-on-surface-variant">x0.9998</td>
+<td class="px-5 py-4 text-right">
+<button class="text-white hover:text-secondary border border-outline px-3 py-1 text-[0.6rem] uppercase font-bold tracking-widest transition-colors recalibrate-btn" data-sensor="ECG_LEAD_II">Recalibrate</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-highest/30 transition-colors">
+<td class="px-5 py-4 font-mono-tech font-medium text-white">TEMP_PROBE</td>
+<td class="px-5 py-4 text-center">
+<span class="px-2 py-0.5 bg-secondary-container text-secondary text-[0.65rem] font-bold">CALIBRATED</span>
+</td>
+<td class="px-5 py-4 text-on-surface-variant">0.000°C</td>
+<td class="px-5 py-4 text-on-surface-variant">x1.0000</td>
+<td class="px-5 py-4 text-right">
+<button class="text-white hover:text-secondary border border-outline px-3 py-1 text-[0.6rem] uppercase font-bold tracking-widest transition-colors recalibrate-btn" data-sensor="TEMP_PROBE">Recalibrate</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-highest/30 transition-colors">
+<td class="px-5 py-4 font-mono-tech font-medium text-white">ACCEL_X</td>
+<td class="px-5 py-4 text-center">
+<span class="px-2 py-0.5 bg-secondary-container text-secondary text-[0.65rem] font-bold">CALIBRATED</span>
+</td>
+<td class="px-5 py-4 text-on-surface-variant">+0.041g</td>
+<td class="px-5 py-4 text-on-surface-variant">x1.0021</td>
+<td class="px-5 py-4 text-right">
+<button class="text-white hover:text-secondary border border-outline px-3 py-1 text-[0.6rem] uppercase font-bold tracking-widest transition-colors recalibrate-btn" data-sensor="ACCEL_X">Recalibrate</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- NETWORK DIAGNOSTICS -->
+<div class="bg-surface-container flex flex-col">
+<div class="bg-surface-container-high px-5 py-3 flex justify-between items-center">
+<h2 class="font-headline text-sm font-bold tracking-widest uppercase">NETWORK DIAGNOSTICS</h2>
+<span class="material-symbols-outlined text-sm text-on-surface-variant" data-icon="network_check">network_check</span>
+</div>
+<div class="p-5 flex-1 space-y-6">
+<div class="space-y-2">
+<div class="flex justify-between text-[0.65rem] font-headline uppercase tracking-widest">
+<span class="text-on-surface-variant">Latency Graph (Real-time)</span>
+<span class="text-secondary">48ms AVG</span>
+</div>
+<div class="h-24 bg-surface-container-lowest flex items-end px-1 overflow-hidden">
+<div class="flex-1 bg-secondary/30 mx-0.5" style="height: 40%"></div>
+<div class="flex-1 bg-secondary/40 mx-0.5" style="height: 45%"></div>
+<div class="flex-1 bg-secondary/30 mx-0.5" style="height: 38%"></div>
+<div class="flex-1 bg-secondary/50 mx-0.5" style="height: 52%"></div>
+<div class="flex-1 bg-secondary/30 mx-0.5" style="height: 41%"></div>
+<div class="flex-1 bg-secondary/20 mx-0.5" style="height: 35%"></div>
+<div class="flex-1 bg-secondary/60 mx-0.5" style="height: 60%"></div>
+<div class="flex-1 bg-secondary/40 mx-0.5" style="height: 48%"></div>
+<div class="flex-1 bg-secondary/30 mx-0.5" style="height: 42%"></div>
+<div class="flex-1 bg-secondary/50 mx-0.5" style="height: 55%"></div>
+<div class="flex-1 bg-secondary/30 mx-0.5" style="height: 39%"></div>
+<div class="flex-1 bg-secondary/40 mx-0.5" style="height: 46%"></div>
+<div class="flex-1 bg-secondary/30 mx-0.5" style="height: 41%"></div>
+<div class="flex-1 bg-secondary/70 mx-0.5" style="height: 72%"></div>
+<div class="flex-1 bg-secondary/40 mx-0.5" style="height: 45%"></div>
+<div class="flex-1 bg-secondary/30 mx-0.5" style="height: 38%"></div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-lowest p-3 border-l border-secondary">
+<div class="text-[0.6rem] font-bold text-on-surface-variant uppercase tracking-tighter">Packet Loss</div>
+<div class="text-xl font-headline font-bold text-white">0.001%</div>
+</div>
+<div class="bg-surface-container-lowest p-3 border-l border-secondary">
+<div class="text-[0.6rem] font-bold text-on-surface-variant uppercase tracking-tighter">Jitter</div>
+<div class="text-xl font-headline font-bold text-white">0.2ms</div>
+</div>
+</div>
+<div class="pt-2">
+<div class="text-[0.65rem] font-headline uppercase text-on-surface-variant mb-2">Signal Integrity Blocks</div>
+<div class="flex space-x-1">
+<div class="w-full h-2 bg-secondary"></div>
+<div class="w-full h-2 bg-secondary"></div>
+<div class="w-full h-2 bg-secondary"></div>
+<div class="w-full h-2 bg-secondary"></div>
+<div class="w-full h-2 bg-secondary"></div>
+<div class="w-full h-2 bg-secondary"></div>
+<div class="w-full h-2 bg-secondary"></div>
+<div class="w-full h-2 bg-secondary"></div>
+<div class="w-full h-2 bg-tertiary-container/40"></div>
+<div class="w-full h-2 bg-tertiary-container/20"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- TEST EXECUTION LOG -->
+<section class="bg-surface-container-lowest border border-outline-variant/10 shadow-2xl">
+<div class="bg-surface-container-highest/20 px-4 py-2 border-b border-outline-variant/10 flex justify-between items-center">
+<div class="flex items-center space-x-2">
+<span class="w-3 h-3 bg-tertiary-container rounded-full"></span>
+<span class="w-3 h-3 bg-secondary-container rounded-full"></span>
+<span class="w-3 h-3 bg-surface-container-highest rounded-full"></span>
+<span class="ml-4 font-headline text-[0.6rem] tracking-widest uppercase font-bold text-on-surface-variant/80">CORE_DIAGNOSTIC_SHELL :: TTY1</span>
+</div>
+<span class="text-[0.6rem] font-mono text-on-surface-variant/40 italic">Last login: 14:21:44 via SSH</span>
+</div>
+<div class="p-6 h-64 overflow-y-auto font-mono-tech text-[0.8rem] text-secondary/80 space-y-1">
+<p><span class="text-on-surface-variant opacity-50">[14:22:01]</span> <span class="text-white font-bold">[INIT]</span> Initializing system-wide diagnostic sweep...</p>
+<p><span class="text-on-surface-variant opacity-50">[14:22:01]</span> <span class="text-white font-bold">[DIAG]</span> Internal oscillator sync: <span class="text-secondary underline">SUCCESS</span></p>
+<p><span class="text-on-surface-variant opacity-50">[14:22:02]</span> <span class="text-white font-bold">[DIAG]</span> Thermal noise baseline check: <span class="text-primary">0.02mV</span> (Tolerance: 0.05mV)</p>
+<p><span class="text-on-surface-variant opacity-50">[14:22:02]</span> <span class="text-white font-bold">[DIAG]</span> ADC linearity test: <span class="text-secondary font-black">PASS</span></p>
+<p><span class="text-on-surface-variant opacity-50">[14:22:03]</span> <span class="text-white font-bold">[DIAG]</span> Checking I2C bus 0x4A... Response received in 2ms.</p>
+<p><span class="text-on-surface-variant opacity-50">[14:22:04]</span> <span class="text-white font-bold">[DIAG]</span> Memory parity check: Complete. No errors found.</p>
+<p><span class="text-on-surface-variant opacity-50">[14:22:05]</span> <span class="text-white font-bold">[DIAG]</span> Biometric frontend amplification level: 40dB [STABLE]</p>
+<p><span class="text-on-surface-variant opacity-50">[14:22:06]</span> <span class="text-white font-bold">[DIAG]</span> Sub-system 04 (Pulse_Oximetry) responding with packet type 0xEF.</p>
+<p><span class="text-on-surface-variant opacity-50">[14:22:07]</span> <span class="text-white font-bold">[WAIT]</span> Awaiting heartbeat confirmation from lead sensor array...</p>
+<p><span class="text-on-surface-variant opacity-50">[14:22:08]</span> <span class="text-secondary animate-pulse font-black">_</span></p>
+</div>
+</section>
+</main>
+<!-- FOOTER BAR -->
+<footer class="mt-auto border-t border-outline-variant/10 px-6 py-3 flex justify-between items-center bg-surface-container-low text-[0.6rem] font-headline tracking-widest text-on-surface-variant">
+<div class="flex items-center space-x-6">
+<span>PULSEPRINT CONSOLE V2.4.0-STABLE</span>
+<span>ENGINEER_UID: CHEN_7_012</span>
+</div>
+<div class="flex items-center space-x-4">
+<span class="flex items-center text-secondary">
+<span class="w-1.5 h-1.5 bg-secondary mr-2"></span>
+                    TX/RX ACTIVE
+                </span>
+<span class="opacity-30">|</span>
+<span>ENCRYPTION: AES-256-GCM</span>
+</div>
+</footer>
+</div>
+<script>
+  (function () {
+    const runBtn = document.getElementById("runDiagnosticsBtn");
+    const cpuUsage = document.getElementById("cpuUsage");
+    const memoryUsage = document.getElementById("memoryUsage");
+    const diagTemp = document.getElementById("diagTemp");
+    const diagVoltage = document.getElementById("diagVoltage");
+    const sensorRows = Array.from(document.querySelectorAll("tbody tr"));
+    const originalSensorMarkup = sensorRows.map((row) => row.innerHTML);
+    const spinnerMarkup = '<div class="diag-spinner" aria-label="loading"></div>';
+
+    function sleep(ms) {
+      return new Promise((resolve) => setTimeout(resolve, ms));
+    }
+
+    function randomBetween(min, max) {
+      return min + Math.random() * (max - min);
+    }
+
+    function showLoading() {
+      cpuUsage.innerHTML = spinnerMarkup;
+      memoryUsage.innerHTML = spinnerMarkup;
+      diagTemp.innerHTML = spinnerMarkup;
+      diagVoltage.innerHTML = spinnerMarkup;
+
+      sensorRows.forEach((row) => {
+        const cells = row.querySelectorAll("td");
+        if (cells[1]) cells[1].innerHTML = spinnerMarkup;
+        if (cells[2]) cells[2].innerHTML = spinnerMarkup;
+        if (cells[3]) cells[3].innerHTML = spinnerMarkup;
+      });
+    }
+
+    function animateValue(element, from, to, durationMs, formatter) {
+      return new Promise((resolve) => {
+        const start = performance.now();
+        function frame(now) {
+          const progress = Math.min(1, (now - start) / durationMs);
+          const current = from + (to - from) * progress;
+          element.textContent = formatter(current);
+          if (progress < 1) requestAnimationFrame(frame);
+          else resolve();
+        }
+        requestAnimationFrame(frame);
+      });
+    }
+
+    async function updateValues() {
+      const cpu = randomBetween(10, 30);
+      const memory = randomBetween(3, 8);
+      const temp = randomBetween(30, 45);
+      const voltage = randomBetween(1.1, 1.3);
+
+      cpuUsage.classList.add("diag-fade-in");
+      await animateValue(cpuUsage, 0, cpu, 700, (v) => `${Math.round(v)}%`);
+      await sleep(120);
+      memoryUsage.classList.add("diag-fade-in");
+      await animateValue(memoryUsage, 0, memory, 700, (v) => v.toFixed(1));
+      await sleep(120);
+      diagTemp.classList.add("diag-fade-in");
+      await animateValue(diagTemp, 0, temp, 700, (v) => `${Math.round(v)}°C`);
+      await sleep(120);
+      diagVoltage.classList.add("diag-fade-in");
+      await animateValue(diagVoltage, 0, voltage, 700, (v) => `${v.toFixed(2)}V`);
+
+      sensorRows.forEach((row, index) => {
+        setTimeout(() => {
+          const cells = row.querySelectorAll("td");
+          if (cells[1]) {
+            cells[1].innerHTML = '<span class="px-2 py-0.5 bg-secondary-container text-secondary text-[0.65rem] font-bold diag-fade-in">CALIBRATED</span>';
+          }
+          if (cells[2]) {
+            const offset = (Math.random() * 0.01 - 0.005).toFixed(3);
+            const sign = Number(offset) >= 0 ? "+" : "";
+            cells[2].textContent = `${sign}${offset}mV`;
+            cells[2].classList.add("diag-fade-in");
+          }
+          if (cells[3]) {
+            const gain = (1 + (Math.random() * 0.004 - 0.002)).toFixed(4);
+            cells[3].textContent = `x${gain}`;
+            cells[3].classList.add("diag-fade-in");
+          }
+        }, index * 140);
+      });
+    }
+
+    async function runDiagnostics() {
+      if (!runBtn) return;
+      runBtn.disabled = true;
+      runBtn.textContent = "Running Diagnostics...";
+
+      cpuUsage.classList.remove("diag-fade-in");
+      memoryUsage.classList.remove("diag-fade-in");
+      diagTemp.classList.remove("diag-fade-in");
+      diagVoltage.classList.remove("diag-fade-in");
+      sensorRows.forEach((row, index) => {
+        row.innerHTML = originalSensorMarkup[index];
+      });
+
+      showLoading();
+
+      try {
+        await sleep(3000);
+        await updateValues();
+      } finally {
+        runBtn.disabled = false;
+        runBtn.textContent = "Run All Diagnostics";
+      }
+    }
+
+    document.querySelectorAll(".recalibrate-btn").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const sensor = btn.dataset.sensor;
+        btn.disabled = true;
+        btn.textContent = "Calibrating...";
+        try {
+          await fetch(`${API}/api/system/calibrate/${sensor}`, { method: "POST" });
+        } finally {
+          btn.disabled = false;
+          btn.textContent = "Recalibrate";
+        }
+      });
+    });
+
+    runBtn && runBtn.addEventListener("click", runDiagnostics);
+  })();
+</script>
+</body></html>

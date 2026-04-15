@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@300;400;500;700;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<style>
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: #131313;
+    color: #e5e2e1;
+    margin: 0;
+  }
+  .headline-font { font-family: 'Space Grotesk', sans-serif; }
+  .label-font { font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; }
+  .mono-font { font-family: 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', monospace; }
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+  .terminal-scroll::-webkit-scrollbar { width: 4px; }
+  .terminal-scroll::-webkit-scrollbar-track { background: #0e0e0e; }
+  .terminal-scroll::-webkit-scrollbar-thumb { background: #353534; }
+</style>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "tertiary-fixed-dim": "#910807",
+          "on-secondary": "#00210c",
+          "on-tertiary": "#410000",
+          "primary-container": "#d4d4d4",
+          "on-primary": "#1a1c1c",
+          "surface-dim": "#131313",
+          "on-secondary-container": "#6bfe9c",
+          "on-background": "#e5e2e1",
+          "on-tertiary-fixed": "#ffffff",
+          "on-primary-fixed": "#ffffff",
+          "primary-fixed-dim": "#454747",
+          "error": "#ffb4ab",
+          "surface-container-low": "#1c1b1b",
+          "surface-bright": "#3a3939",
+          "primary": "#ffffff",
+          "on-primary-fixed-variant": "#e2e2e2",
+          "surface-container-lowest": "#0e0e0e",
+          "on-tertiary-container": "#000000",
+          "primary-fixed": "#5d5f5f",
+          "secondary-container": "#005228",
+          "surface-container-highest": "#353534",
+          "outline-variant": "#474747",
+          "tertiary-fixed": "#b4271d",
+          "surface-container": "#201f1f",
+          "on-secondary-fixed-variant": "#004520",
+          "on-tertiary-fixed-variant": "#ffdad5",
+          "inverse-surface": "#e5e2e1",
+          "inverse-on-surface": "#313030",
+          "background": "#131313",
+          "on-surface": "#e5e2e1",
+          "surface-container-high": "#2a2a2a",
+          "secondary": "#4ae183",
+          "tertiary": "#ffdad5",
+          "surface": "#131313",
+          "surface-tint": "#c6c6c6",
+          "secondary-fixed": "#4ae183",
+          "on-error-container": "#ffdad6",
+          "error-container": "#93000a",
+          "inverse-primary": "#5d5f5f",
+          "outline": "#919191",
+          "on-secondary-fixed": "#00210c",
+          "on-error": "#690005",
+          "tertiary-container": "#fa5a48",
+          "secondary-fixed-dim": "#1fc46a",
+          "on-surface-variant": "#c6c6c6",
+          "on-primary-container": "#000000",
+          "surface-variant": "#353534"
+        },
+        fontFamily: {
+          "headline": ["Space Grotesk"],
+          "body": ["Inter"],
+          "label": ["Space Grotesk"]
+        },
+        borderRadius: { "DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px" },
+      },
+    },
+  }
+</script>
+</head>
+<body class="bg-background text-on-surface">
+
+<!-- Full-height layout wrapper -->
+<div class="flex h-screen overflow-hidden">
+
+  <!-- SideNavBar -->
+  <aside class="hidden md:flex flex-col h-full border-r border-[#474747]/15 bg-[#1c1b1b] w-64 shrink-0">
+    <div class="p-6">
+      <div class="text-lg font-black text-[#ffffff] font-headline tracking-widest">PULSEPRINT</div>
+      <div class="font-['Space_Grotesk'] text-[0.6875rem] tracking-widest uppercase text-on-surface-variant mt-1">ENGINEERING_CONSOLE_V1</div>
+    </div>
+
+    <nav class="flex-1 px-3 space-y-1">
+      <a class="flex items-center gap-3 px-3 py-2 text-[#c6c6c6] hover:bg-[#201f1f] hover:text-[#ffffff] transition-all duration-150 ease-in-out font-label text-[0.6875rem] tracking-widest uppercase" href="index.html">
+        <span class="material-symbols-outlined text-lg">developer_board</span>
+        <span>DEVICES</span>
+      </a>
+      <a class="flex items-center gap-3 px-3 py-2 text-[#c6c6c6] hover:bg-[#201f1f] hover:text-[#ffffff] transition-all duration-150 ease-in-out font-label text-[0.6875rem] tracking-widest uppercase" href="dashboard.html">
+        <span class="material-symbols-outlined text-lg">dashboard</span>
+        <span>DASHBOARD</span>
+      </a>
+      <!-- LOGS (ACTIVE) -->
+      <a class="flex items-center gap-3 px-3 py-2 bg-[#353534] text-[#4ae183] border-r-2 border-[#4ae183] transition-all duration-150 ease-in-out font-label text-[0.6875rem] tracking-widest uppercase" href="logs.html">
+        <span class="material-symbols-outlined text-lg">terminal</span>
+        <span>LOGS</span>
+      </a>
+      <a class="flex items-center gap-3 px-3 py-2 text-[#c6c6c6] hover:bg-[#201f1f] hover:text-[#ffffff] transition-all duration-150 ease-in-out font-label text-[0.6875rem] tracking-widest uppercase" href="diagnostics.html">
+        <span class="material-symbols-outlined text-lg">analytics</span>
+        <span>DIAGNOSTICS</span>
+      </a>
+    </nav>
+
+    <div class="mt-auto border-t border-[#474747]/15 p-3 space-y-1">
+      <a class="flex items-center gap-3 px-3 py-2 text-[#c6c6c6] hover:bg-[#201f1f] hover:text-[#ffffff] font-label text-[0.6875rem] tracking-widest uppercase" href="settings.html">
+        <span class="material-symbols-outlined text-lg">settings</span>
+        <span>SETTINGS</span>
+      </a>
+      <a class="flex items-center gap-3 px-3 py-2 text-[#c6c6c6] hover:bg-[#201f1f] hover:text-[#ffffff] font-label text-[0.6875rem] tracking-widest uppercase" href="logout.html">
+        <span class="material-symbols-outlined text-lg">logout</span>
+        <span>LOGOUT</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- Right side: TopBar + Main content -->
+  <div class="flex flex-col flex-1 min-w-0 overflow-hidden">
+
+    <!-- TopAppBar -->
+    <header class="flex justify-between items-center w-full px-6 h-14 bg-[#131313] shrink-0 z-50">
+      <div class="flex items-center gap-4">
+        <span class="font-['Space_Grotesk'] uppercase tracking-tighter text-sm font-bold text-[#ffffff]">SYSTEM STATUS:</span>
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+          <span class="font-['Space_Grotesk'] uppercase tracking-tighter text-sm text-[#4ae183] font-bold">MONITORING</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-6">
+        <div class="hidden sm:flex items-center gap-4 text-on-surface-variant font-label text-[0.6875rem] tracking-widest">
+          <span>UTC: 14:32:09</span>
+          <span>SESSION_ID: PP_0492_X</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <button class="material-symbols-outlined text-[#c6c6c6] hover:bg-[#353534] p-1.5 transition-colors">bluetooth</button>
+          <button class="material-symbols-outlined text-[#c6c6c6] hover:bg-[#353534] p-1.5 transition-colors">schedule</button>
+          <div class="w-[1px] h-6 bg-outline-variant/30 mx-2"></div>
+          <div class="w-8 h-8 bg-surface-container-highest flex items-center justify-center font-bold text-xs">A1</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Scrollable main content -->
+    <main class="flex-1 overflow-y-auto flex flex-col">
+
+      <!-- Telemetry Cards -->
+      <section class="px-6 pt-4 pb-4 shrink-0">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="bg-surface-container-low p-4 flex flex-col gap-1">
+            <span class="text-[10px] font-bold text-on-surface-variant label-font">STREAMS ACTIVE</span>
+            <span class="text-lg font-bold headline-font text-white">12</span>
+          </div>
+          <div class="bg-surface-container-low p-4 flex flex-col gap-1">
+            <span class="text-[10px] font-bold text-on-surface-variant label-font">UPTIME</span>
+            <span class="text-lg font-bold headline-font text-white">142:12:04</span>
+          </div>
+          <div class="bg-surface-container-low p-4 flex flex-col gap-1">
+            <span class="text-[10px] font-bold text-on-surface-variant label-font">SESSION ID</span>
+            <span class="text-lg font-bold headline-font text-white">PS-0x9F442E</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Terminal Console — grows to fill remaining space -->
+      <section class="flex flex-col flex-1 mx-6 mb-4 bg-surface-container-lowest border border-outline-variant/10 min-h-0">
+        <div class="bg-surface-container-high px-4 py-2 flex justify-between items-center shrink-0">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-sm text-on-surface-variant">terminal</span>
+            <span class="text-[10px] font-bold label-font text-white tracking-widest">KERNEL_LOG_STREAM_v4.02</span>
+          </div>
+          <div class="flex gap-4">
+            <span class="text-[9px] font-mono text-secondary">LIVE_FEED:ON</span>
+            <span class="text-[9px] font-mono text-on-surface-variant">BUF: 1024KB</span>
+          </div>
+        </div>
+        <div class="flex-1 p-4 mono-font text-[12px] leading-relaxed overflow-y-auto terminal-scroll text-on-surface-variant min-h-0" id="liveLogs">
+          <p class="mb-1"><span class="text-outline">14:22:01.002</span> <span class="text-secondary font-bold">[SYS]</span> Initializing core kernel subsystems...</p>
+          <p class="mb-1"><span class="text-outline">14:22:01.045</span> <span class="text-[#4ae183] font-bold">[SYS]</span> Power distribution stabilized at 1.2V.</p>
+          <p class="mb-1"><span class="text-outline">14:22:01.120</span> <span class="text-[#00bcd4] font-bold">[DATA]</span> Handshake established with REMOTE_NODE_07.</p>
+          <p class="mb-1"><span class="text-outline">14:22:01.442</span> <span class="text-[#2196f3] font-bold">[PROC]</span> Allocating buffer for stream ID: 0xFF-44.</p>
+          <p class="mb-1"><span class="text-outline">14:22:02.001</span> <span class="text-tertiary-container font-bold">[WARN]</span> Latency spike detected on BUS_CHANNEL_B (14ms).</p>
+          <p class="mb-1"><span class="text-outline">14:22:02.155</span> <span class="text-[#4ae183] font-bold">[MATCH]</span> Pattern identified: SEQUENCE_DELTA_V2.</p>
+          <p class="mb-1"><span class="text-outline">14:22:02.156</span> <span class="text-[#00bcd4] font-bold">[DATA]</span> Packet 10443 received, checksum verified.</p>
+          <p class="mb-1"><span class="text-outline">14:22:02.180</span> <span class="text-[#2196f3] font-bold">[PROC]</span> Executing secondary analysis routine...</p>
+          <p class="mb-1"><span class="text-outline">14:22:03.011</span> <span class="text-[#4ae183] font-bold">[SYS]</span> Buffer warming initiated for print engine.</p>
+          <p class="mb-1"><span class="text-outline">14:22:03.045</span> <span class="text-[#00bcd4] font-bold">[DATA]</span> Inbound stream synchronized at 400Gbps.</p>
+          <p class="mb-1"><span class="text-outline">14:22:04.221</span> <span class="text-tertiary-container font-bold">[WARN]</span> Cooling unit throttled to 80% capacity.</p>
+          <p class="mb-1"><span class="text-outline">14:22:05.101</span> <span class="text-[#4ae183] font-bold">[MATCH]</span> Target geometry verified. Alignment 0.0001mm.</p>
+          <p class="mb-1"><span class="text-outline">14:22:05.442</span> <span class="text-[#2196f3] font-bold">[PROC]</span> Rasterizing vector layer 440...</p>
+          <p class="mb-1"><span class="text-outline">14:22:05.990</span> <span class="text-[#00bcd4] font-bold">[DATA]</span> 500 records committed to local stack.</p>
+          <p class="mb-1"><span class="text-outline">14:22:06.104</span> <span class="text-[#4ae183] font-bold">[SYS]</span> Subsystem heartbeat OK.</p>
+          <p class="mb-1"><span class="text-outline">14:22:07.412</span> <span class="text-[#2196f3] font-bold">[PROC]</span> Priority task P0-772 assigned.</p>
+          <p class="mb-1"><span class="text-outline">14:22:08.000</span> <span class="text-white animate-pulse">_</span></p>
+        </div>
+      </section>
+
+      <!-- Bottom Metrics -->
+      <section class="px-6 pb-4 shrink-0">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="bg-surface-container p-4 flex flex-col gap-3">
+            <div class="flex justify-between items-start">
+              <span class="text-[10px] font-bold text-on-surface-variant label-font tracking-wider">THROUGHPUT</span>
+              <span class="text-[10px] font-mono text-secondary">MAX: 12GB/s</span>
+            </div>
+            <div class="flex items-end gap-1 h-8">
+              <div class="w-full h-full flex items-end gap-[2px]">
+                <div class="bg-secondary/40 w-full" style="height: 40%"></div>
+                <div class="bg-secondary/40 w-full" style="height: 60%"></div>
+                <div class="bg-secondary/40 w-full" style="height: 50%"></div>
+                <div class="bg-secondary w-full" style="height: 80%"></div>
+                <div class="bg-secondary/40 w-full" style="height: 70%"></div>
+                <div class="bg-secondary/40 w-full" style="height: 90%"></div>
+                <div class="bg-secondary/40 w-full" style="height: 55%"></div>
+                <div class="bg-secondary/40 w-full" style="height: 65%"></div>
+                <div class="bg-secondary/40 w-full" style="height: 45%"></div>
+                <div class="bg-secondary w-full" style="height: 100%"></div>
+              </div>
+            </div>
+          </div>
+          <div class="bg-surface-container p-4 flex flex-col gap-1">
+            <span class="text-[10px] font-bold text-on-surface-variant label-font tracking-wider">ERROR LOG RATIO</span>
+            <div class="flex items-baseline gap-2">
+              <span class="text-2xl font-black headline-font text-white">0.02%</span>
+              <span class="text-[10px] text-secondary label-font">NOMINAL</span>
+            </div>
+          </div>
+          <div class="bg-surface-container p-4 flex flex-col gap-1">
+            <span class="text-[10px] font-bold text-on-surface-variant label-font tracking-wider">NETWORK LATENCY</span>
+            <div class="flex items-baseline gap-2">
+              <span class="text-2xl font-black headline-font text-white">4ms</span>
+              <span class="text-[10px] text-secondary label-font">OPTIMIZED</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<script src="http://localhost:5050/socket.io/socket.io.js"></script>
+<script>
+  (function () {
+    const API = "http://localhost:5050";
+    const container = document.getElementById("liveLogs");
+    if (!container) return;
+
+    function render(entry) {
+      const p = document.createElement("p");
+      p.className = "mb-1";
+      const ts = new Date(entry.timestamp || Date.now()).toLocaleTimeString();
+      p.innerHTML = `<span class="text-outline">${ts}</span> <span class="text-secondary font-bold">[${entry.level || "SYS"}]</span> ${entry.message || entry.formatted || ""}`;
+      container.prepend(p);
+      while (container.children.length > 180) container.removeChild(container.lastChild);
+    }
+
+    fetch(`${API}/api/logs?limit=60`)
+      .then((r) => r.json())
+      .then((payload) => {
+        if (!payload.ok) return;
+        container.innerHTML = "";
+        payload.logs.reverse().forEach(render);
+      })
+      .catch(() => {});
+
+    if (window.io) {
+      const socket = io(API);
+      socket.on("logs:update", render);
+    }
+  })();
+</script>
+</body>
+</html>
